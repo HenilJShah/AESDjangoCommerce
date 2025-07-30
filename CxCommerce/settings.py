@@ -53,7 +53,11 @@ USER_APPS = [
 ]
 
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt.token_blacklist"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "rest_framework_simplejwt",
+]
 
 INSTALLED_APPS = INSTALLED_APPS + USER_APPS + THIRD_PARTY_APPS
 
@@ -147,6 +151,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "appUsers.serializers.CustomTokenObtainPairSerializer",
+}
 
 # user apps settings
 AUTH_USER_MODEL = "appUsers.User"
