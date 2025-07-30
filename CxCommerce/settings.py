@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+from django.conf.global_settings import AUTH_USER_MODEL
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,10 +41,19 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-USER_APPS = ["Products.apps.ProductsConfig"]
+USER_APPS = [
+    "Products.apps.ProductsConfig",
+    "Orders.apps.OrdersConfig",
+    "Categories.apps.CategoriesConfig",
+    "appUsers.apps.AppusersConfig",
+    "Core.apps.CoreConfig",
+    "dashboard.apps.DashboardConfig",
+    "exporter.apps.ExporterConfig",
+    "dummygen.apps.DummygenConfig",
+]
 
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt"]
+THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt.token_blacklist"]
 
 INSTALLED_APPS = INSTALLED_APPS + USER_APPS + THIRD_PARTY_APPS
 
@@ -127,3 +138,15 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# rest api settings
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+
+# user apps settings
+AUTH_USER_MODEL = "appUsers.User"
